@@ -5,6 +5,7 @@ const users = [
 ];
 
 module.exports = {
+    users,
     get,
     register,
     login,
@@ -20,9 +21,5 @@ function register(user) {
 }
 
 function login(user) {
-    const foundUser = users.find(u => u.username === user.username && u.password === user.password);
-    if (foundUser) {
-        return Promise.resolve(foundUser)
-    }
-    return Promise.reject(new Error('User not found'));
+    return Promise.resolve(user);
 }

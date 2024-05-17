@@ -1,5 +1,6 @@
 const express = require('express')
 
+const { validateUser, checkUserLogin } = require('../middleware/middleware')
 const Users = require('./users-model')
 
 const router = express.Router()
@@ -12,7 +13,7 @@ router.get('/users', (req, res, next) => {
         .catch(next)
 });
 
-router.post('/register', (req, res, next) => {
+router.post('/register', validateUser, (req, res, next) => {
     Users.register(req.body)
         .then(() => {
             res.status(201).json(req.body)
@@ -20,7 +21,7 @@ router.post('/register', (req, res, next) => {
         .catch(next)
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/login', validateUser, checkUserLogin, (req, res, next) => {
     Users.login(req.body)
         .then(() => {
             res.json({
