@@ -57,12 +57,12 @@ function authenticateToken(req, res, next) {
     const token = req.headers['authorization'];
 
     if (token == null) {
-        next( new CustomError("User unauthorized", 401) );
+        return next( new CustomError("User unauthorized", 401) );
     }
 
     jwt.verify(token, secret, (err, user) => {
         if (err) {
-            next( new CustomError("Session timed out", 403) );
+            return next( new CustomError("Session timed out", 403) );
         }
 
         req.user = user;
