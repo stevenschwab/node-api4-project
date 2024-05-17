@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+
 const users = [
     { username: 'schwabs', password: 'tester' },
     { username: 'haleyc', password: 'tester' },
