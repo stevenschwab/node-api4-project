@@ -11,7 +11,7 @@ module.exports = {
 };
 
 function get() {
-    return users;
+    return Promise.resolve(users);
 }
 
 function register(user) {
@@ -19,5 +19,5 @@ function register(user) {
 }
 
 function login(user) {
-    
+
 }
