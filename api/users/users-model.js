@@ -15,7 +15,8 @@ function get() {
 }
 
 function register(user) {
-
+    users.push(user);
+    return Promise.resolve(user);
 }
 
 function login(user) {
