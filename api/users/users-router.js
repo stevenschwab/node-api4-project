@@ -13,8 +13,8 @@ router.get('/users', authenticateToken, (req, res, next) => {
 
 router.post('/register', validateUser, (req, res, next) => {
     Users.register(req.body)
-        .then(() => {
-            res.status(201).json(req.body)
+        .then(newUser => {
+            res.status(201).json(newUser)
         })
         .catch(next)
 });

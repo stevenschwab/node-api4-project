@@ -26,7 +26,7 @@ function register(user) {
     const hashedPassword = bcrypt.hashSync(user.password, 8);
     const newUser = { ...user, password: hashedPassword };
     users.push(newUser);
-    return Promise.resolve(newUser);
+    return Promise.resolve({ username: newUser.username });
 }
 
 function login(user) {
