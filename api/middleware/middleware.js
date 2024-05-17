@@ -10,6 +10,13 @@ function logger(req, res, next) {
     next();
 };
 
+class CustomError extends Error {
+    constructor(message, status) {
+        super(message);
+        this.status = status;
+    }
+}
+
 function validateUser(req, res, next) {
     const { username, password } = req.body;
     if (
@@ -17,13 +24,13 @@ function validateUser(req, res, next) {
         typeof username !== 'string' || 
         !username.trim().length 
     ) {
-        next({ status: 400, message: "Missing required username field"})
+        next( new CustomError("Missing required username field", 400) );
     } else if (
         !password || 
         typeof password !== 'string' || 
         !password.trim().length
     ) {
-        next({ status: 400, message: "Missing required password field"})
+        next( new CustomError("Missing required password field", 400) );
     } else {
         req.username = username.trim()
         req.password = password.trim()
@@ -38,7 +45,7 @@ function checkUserLogin(req, res, next) {
     if (checkedUser) {
         next();
     } else {
-        next({ status: 400, message: "User log in failed" })
+        next( new CustomError("User log in failed", 400) );
     }
 }
 
