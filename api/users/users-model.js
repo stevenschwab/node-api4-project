@@ -7,6 +7,8 @@ const users = [
     { username: 'olliec', password: bcrypt.hashSync('tester', 8) },
 ];
 
+const secret = process.env.JWT_SECRET; // eslint-disable-line
+
 module.exports = {
     users,
     get,
