@@ -15,6 +15,7 @@ module.exports = {
     register,
     login,
     generateToken,
+    secret,
 };
 
 function get() {

@@ -54,7 +54,9 @@ function checkUserLogin(req, res, next) {
 }
 
 function authenticateToken(req, res, next) {
-    const token = req.headers['authorization'];
+    const authHeader = req.headers['authorization'];
+
+    const token = authHeader && authHeader.split(' ')[1];
 
     if (token == null) {
         return next( new CustomError("User unauthorized", 401) );
