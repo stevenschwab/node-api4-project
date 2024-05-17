@@ -14,7 +14,8 @@ module.exports = {
 };
 
 function get() {
-    return Promise.resolve(users);
+    const usersWithoutPasswords = users.map(({ username }) => ({ username }));
+    return Promise.resolve(usersWithoutPasswords);
 }
 
 function register(user) {
