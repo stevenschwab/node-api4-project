@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const users = [
     { username: 'schwabs', password: bcrypt.hashSync('tester', 8) },
