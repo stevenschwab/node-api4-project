@@ -22,7 +22,7 @@ function register(user) {
 function login(user) {
     const foundUser = users.find(u => u.username === user.username && u.password === user.password);
     if (foundUser) {
-        return Promise.resolve(`Welcome to the application ${foundUser.username}`)
+        return Promise.resolve(foundUser)
     }
     return Promise.reject(new Error('User not found'));
 }
