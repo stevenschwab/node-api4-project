@@ -31,3 +31,13 @@ function register(user) {
 function login(user) {
     return Promise.resolve(user);
 }
+
+function generateToken(user) {
+    const payload = {
+        username: user.username,
+    };
+    const options = {
+        expiresIn: '1h',
+    };
+    return jwt.sign(payload, secret, options);
+}
