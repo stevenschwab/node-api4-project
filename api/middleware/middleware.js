@@ -1,4 +1,5 @@
-const { users } = require('../users/users-model')
+const { users } = require('../users/users-model');
+const bcrypt = require('bcryptjs');
 
 function logger(req, res, next) {
     const date = new Date();
@@ -40,7 +41,9 @@ function validateUser(req, res, next) {
 
 function checkUserLogin(req, res, next) {
     const { username, password } = req.body;
-    const checkedUser = users.find(u => u.username === username && u.password === password)
+    const checkedUser = users.find(u => {
+        return u.username === username && bcrypt.compareSync(password, u.password);
+    })
 
     if (checkedUser) {
         next();

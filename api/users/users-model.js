@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 
 const users = [
-    { username: 'schwabs', password: 'tester' },
-    { username: 'haleyc', password: 'tester' },
-    { username: 'olliec', password: 'tester' },
+    { username: 'schwabs', password: bcrypt.hashSync('tester', 8) },
+    { username: 'haleyc', password: bcrypt.hashSync('tester', 8) },
+    { username: 'olliec', password: bcrypt.hashSync('tester', 8) },
 ];
 
 module.exports = {
@@ -18,8 +18,10 @@ function get() {
 }
 
 function register(user) {
-    users.push(user);
-    return Promise.resolve(user);
+    const hashedPassword = bcrypt.hashSync(user.password, 8);
+    const newUser = { ...user, password: hashedPassword };
+    users.push(newUser);
+    return Promise.resolve(newUser);
 }
 
 function login(user) {
