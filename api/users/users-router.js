@@ -1,11 +1,9 @@
 const express = require('express')
-
-const { validateUser, checkUserLogin } = require('../middleware/middleware')
+const { validateUser, checkUserLogin, authenticateToken } = require('../middleware/middleware')
 const Users = require('./users-model')
-
 const router = express.Router()
 
-router.get('/users', (req, res, next) => {
+router.get('/users', authenticateToken, (req, res, next) => {
     Users.get()
         .then(users => {
             res.json(users)
@@ -24,8 +22,10 @@ router.post('/register', validateUser, (req, res, next) => {
 router.post('/login', validateUser, checkUserLogin, (req, res, next) => {
     Users.login(req.body)
         .then(() => {
+            const token = Users.generateToken(req.body.username);
             res.json({
-                message: `Welcome to the application ${req.body.username}`
+                message: `Welcome to the application ${req.body.username}`,
+                token
             })
         })
         .catch(next)
