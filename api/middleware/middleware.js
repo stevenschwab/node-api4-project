@@ -1,4 +1,5 @@
-const { users } = require('../users/users-model');
+const jwt = require('jsonwebtoken');
+const { users, secret } = require('../users/users-model');
 const bcrypt = require('bcryptjs');
 
 function logger(req, res, next) {
@@ -52,8 +53,26 @@ function checkUserLogin(req, res, next) {
     }
 }
 
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization'];
+
+    if (token == null) {
+        next( new CustomError("User unauthorized", 401) );
+    }
+
+    jwt.verify(token, secret, (err, user) => {
+        if (err) {
+            next( new CustomError("Session timed out", 403) );
+        }
+
+        req.user = user;
+        next();
+    })
+}
+
 module.exports = {
     logger,
     validateUser,
     checkUserLogin,
+    authenticateToken,
 }
