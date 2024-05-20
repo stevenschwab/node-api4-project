@@ -1,0 +1,85 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    gap: 40px;
+    padding: 20px;
+}
+  
+.home-logo {
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 100px;
+    height: auto;
+}
+  
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+  
+.home-content h1 {
+    font-size: 3rem;
+}
+  
+.home-content h2 {
+    font-size: 2rem;
+}
+  
+.sign-up-options {
+    margin: 20px 0;
+}
+
+.sign-up-options .create-account {
+    display: block;
+    margin: 10px 0;
+    padding: 12px 24px;
+    width: 300px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    background-color: #1da1f2;
+    color: #fff;
+}
+
+.sign-up-options .create-account:hover {
+    background-color: #0d8dd9; /* Darker blue on hover */
+}
+
+@media (max-width: 768px) {
+    .sign-up-options .create-account {
+      width: 100%;
+    }
+}
+  
+.terms {
+    margin: 20px 0;
+    font-size: 0.8rem;
+}
+  
+.terms a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+  
+.login-link {
+    margin-top: 20px;
+}
+  
+.login-link a {
+    color: #1da1f2;
+    text-decoration: none;
+}

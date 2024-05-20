@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './Signup.css';
 
 function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/register', { username, password });
+            await axios.post('http://localhost:9000/api/register', { username, password });
+            setError(null)
             navigate('/login');
         } catch (err) {
-            // TODO: set error message in UI below sign up form
+            setError(err.response.data.message)
         }
     }
 
     return (
         <div>
             <h2>Sign Up</h2>
+            {error && <p className='error'>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <input
                  type='text'
@@ -33,8 +37,9 @@ function Signup() {
                  value={password}
                  onChange={(e) => setPassword(e.target.value)}
                 />
+                <button type='submit'>Sign Up</button>
             </form>
-            <button type='submit'>Sign Up</button>
+            <p>Already have an account? <Link to="/login">Log In</Link></p>
         </div>
     );
 }
